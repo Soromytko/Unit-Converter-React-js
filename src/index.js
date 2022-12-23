@@ -1,12 +1,27 @@
-//ReactDOM.render(<h1>Hello</h1>, document.getElementById("app"))
+'use strict';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+const e = React.createElement;
 
-ReactDOM.render(
-    <dev>
-        Приложение работает
-    </dev>,
-    document.getElementById('app')
-);
+class LikeButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { liked: false };
+  }
 
+  render() {
+    if (this.state.liked) {
+      return 'You liked this.';
+    }
+
+    return e(
+      'button',
+      { onClick: () => this.setState({ liked: true }) },
+      'Like'
+    );
+  }
+}
+
+
+const domContainer = document.querySelector('#like_button_container');
+const root = ReactDOM.createRoot(domContainer);
+root.render(e(LikeButton));
