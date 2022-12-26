@@ -1,15 +1,46 @@
+import { thresholdFreedmanDiaconis } from "d3";
 import React from "react";
 import ReactDOM from "react-dom";
+
+let items = [];
+for(var i = 0; i < 3; i++) {
+  items.push(<option value="lime">Lime</option>);
+}
 
 
 class DownDropList extends React.Component {
     constructor (props) {
         super(props)
+
+        this.items = [];
+    }
+
+    addItem(name, value) {
+      this.items.key = value;
+    //   this.items.push({
+    //     key: name,
+    //     value: value
+    // });
+    }
+
+    getReactItems() {
+      let reactItems = []
+      for(const [key, value] of Object.entries(this.items)) {
+        reactItems.push(<option value={key}>{key}</option>);
+      }
+      return 
     }
 
     render () {
         return (
-            <button>{this.props.value}</button>
+            <select>
+              {/* <option value="grapefruit">Grapefruit</option>
+              <option value="lime">Lime</option>
+              <option value="coconut">Coconut</option>
+              <option value="mango">Mango</option> */}
+              {items} 
+            </select>
+            //<button>{this.props.value}</button>
         )
     }
 }
@@ -17,6 +48,12 @@ class DownDropList extends React.Component {
 class App extends React.Component {
     constructor(props) {
         super(props);
+
+        this.fromList = new DownDropList();
+        for (let i = 0; i < 3; i++) {
+          this.fromList.addItem("sd", i);
+        }
+         
     }
 
     render() {
@@ -52,8 +89,8 @@ class App extends React.Component {
         return (
             <div>
                 <div>
-                    <DownDropList value={"Button1"}>Button1</DownDropList>
-                    <DownDropList value={'Button1'}>Button2</DownDropList>
+                    {/* <DownDropList value={"Button1"}>Button1</DownDropList>
+                    <DownDropList value={'Button1'}>Button2</DownDropList> */}
                 </div>
             </div>
             
